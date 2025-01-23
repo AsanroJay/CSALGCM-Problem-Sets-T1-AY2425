@@ -1,0 +1,17 @@
+int minimumDistances(int a_count, int* a) {
+    int min = -1;
+    
+    for(int i = 0; i < a_count; i++){
+        for(int j = i + 1; j < a_count; j++){
+            if(a[j] == a[i]){
+                int dist = j - i;
+                if (min == -1 || dist < min){
+                    min = dist;
+                }
+            }
+        }
+        
+        
+    }
+    return min;
+}
