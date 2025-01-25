@@ -1,0 +1,39 @@
+double* runningMedian(int a_count, int* a, int* result_count) {
+   
+    double* medians = malloc(a_count * sizeof(double));
+    int* sort = malloc(a_count * sizeof(int));
+    int n = 0;
+
+    for (int i = 0; i < a_count; i++) {
+    	
+    	
+        int j = n - 1;
+        
+        while (j >= 0 && sort[j] > a[i]) {
+            sort[j + 1] = sort[j];
+            j--;
+        }
+        sort[j + 1] = a[i];
+        n++;
+
+        // Median
+        if (n % 2 == 1) {
+            // Odd 
+            medians[i] = sort[n / 2];
+        } else {
+            // Even meaning between 2 elems
+            int mid1 = n / 2;
+            int mid2 = mid1 - 1;
+            
+            medians[i] = (sort[mid1] + sort[mid2]) / 2.0;
+        }
+    }
+
+    
+    *result_count = a_count;
+
+   
+    free(sort);
+
+    return medians;
+}
