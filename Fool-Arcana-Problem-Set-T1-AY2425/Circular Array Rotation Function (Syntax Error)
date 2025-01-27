@@ -1,0 +1,16 @@
+def circularArrayRotation(a, k, queries):
+    # Write your code here
+    last_index = len(a) - 1
+    zero_index = 0
+    insert_data = 0
+    return_array = []
+    
+    while k > 0:
+        insert_data = a[last_index].pop()
+        a.insert(0,insert_data)
+        k -= 1
+    
+    for x in queries:
+        return_array.insert(0,a[x])
+        
+    return return_array
