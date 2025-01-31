@@ -1,0 +1,7 @@
+def solve(e,t):
+  # solve for answer
+    ans = pow(e,t,10000000)
+    print(ans)
+
+e, t = list(map(int,input().rstrip().split(" ")))
+solve(e,t)
