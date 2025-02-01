@@ -1,0 +1,59 @@
+import math
+
+"""
+Takes in the key input values and returns a list of strings containing the 
+answers.
+
+Parameters:
+n : int - number of pillars
+k : int - number of attacks
+d_i : array-like - list of shape (k,) containing the damage dealt by each attack
+s_i : array_like - list of shape (n,) containing the strength of each pillar
+
+Returns:
+
+list of strings to be printed. For example, if the answer to be printed is:
+
+5
+2
+0
+
+return ["5","2","0"]
+"""
+def solve(n,k,d_i,s_i):
+    s_i.sort()
+    towers_left = n
+    total_damage = 0
+    attack_i = 0
+    res = []
+    while(towers_left>0):
+        
+        total_damage += d_i[attack_i] #instead of looping through each k, we can keep track of the indices instead
+        lo = 0
+        hi = n
+        crumbled = 0
+         
+        while(lo < hi): #
+            mid = (hi + lo) // 2
+            if(s_i[mid] <= total_damage):
+                lo = mid + 1
+                crumbled = mid + 1
+            else:
+                hi = mid
+            
+        towers_left = n - crumbled
+        res.append(str(towers_left))
+        
+        if towers_left == 0:
+            break
+        
+        attack_i = (attack_i + 1) % k #initially implemented using an if-else but this seems to be more efficient
+    
+    return res
+        
+
+n,k = list(map(int,input().strip().split(" ")))
+d_i = [int(input()) for i in range(k)]
+s_i = [int(input()) for i in range(n)]
+
+print("\n".join(solve(n,k,d_i,s_i)) + "\n")
